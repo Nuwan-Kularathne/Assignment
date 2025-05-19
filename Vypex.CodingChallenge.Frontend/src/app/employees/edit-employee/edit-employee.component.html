@@ -1,0 +1,53 @@
+<form nz-form nzLayout="vertical" [formGroup]="form">
+  <nz-form-item>
+    <nz-form-label>Name:</nz-form-label>
+    <div class="ml-4">{{ name }}</div>
+  </nz-form-item>
+  <button *ngIf="!inEditMode" nz-button nzType="default" (click)="addLeave()">
+    ➕ Add Leave Record
+  </button>
+
+  <div *ngIf="inEditMode">
+    <ng-container>
+      <nz-form-control>
+        <input
+          nz-input
+          class="!w-36"
+          type="date"
+          formControlName="startDate"
+          (click)="clearErrors()"
+        />
+        to
+        <input
+          nz-input
+          class="!w-36"
+          type="date"
+          formControlName="endDate"
+          (click)="clearErrors()"
+        />
+        <button nz-button nzType="primary" class="m-2" (click)="submit()">
+          Submit
+        </button>
+        <button nz-button nzType="link" class="w-12" (click)="cancel()">
+          Cancel
+        </button>
+      </nz-form-control>
+    </ng-container>
+    <ng-container *ngIf="errorText">
+      <label class="text-red-600 text-sm font-medium m-2">{{
+        errorText
+      }}</label>
+    </ng-container>
+  </div>
+</form>
+<nz-form-label class="mt-8 mb-1">Leave Days</nz-form-label>
+
+@for (leaveDay of leaveDays; track leaveDay.id) {
+<app-edit-leave [leaveDay]="leaveDay" />
+}
+
+<div class="flex justify-end p-4">
+  <button nz-button type="button" nzType="default" (click)="close()">
+    Close
+  </button>
+</div>

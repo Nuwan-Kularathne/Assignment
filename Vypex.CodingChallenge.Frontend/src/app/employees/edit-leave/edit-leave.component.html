@@ -1,0 +1,56 @@
+<div *ngIf="!deleted">
+  <form [formGroup]="leaveUpdateForm">
+    <ng-container *ngIf="!inEditMode; else editTemplate">
+      <nz-form-control>
+        <label class="m-2">{{
+          leaveDay.startDate | date : "dd/MM/yyyy"
+        }}</label>
+        to
+        <label class="m-2">{{ leaveDay.endDate | date : "dd/MM/yyyy" }}</label>
+        <button nz-button nzType="default" class="m-2" (click)="edit()">
+          ✏️ Edit
+        </button>
+        <button
+          nz-button
+          nzType="primary"
+          nzDanger
+          class="m-2"
+          (click)="delete()"
+        >
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+          Delete
+        </button>
+      </nz-form-control>
+    </ng-container>
+    <ng-template #editTemplate>
+      <nz-form-control>
+        <input
+          nz-input
+          class="!w-36"
+          type="date"
+          formControlName="startDate"
+          (click)="clearErrors()"
+        />
+        to
+        <input
+          nz-input
+          class="!w-36"
+          type="date"
+          formControlName="endDate"
+          (click)="clearErrors()"
+        />
+        <button nz-button nzType="primary" class="m-2" (click)="submit()">
+          Submit
+        </button>
+        <button nz-button nzType="link" class="w-12" (click)="cancel()">
+          Cancel
+        </button>
+      </nz-form-control>
+    </ng-template>
+    <ng-container *ngIf="errorText">
+      <label class="text-red-600 text-sm font-medium m-2">{{
+        errorText
+      }}</label>
+    </ng-container>
+  </form>
+</div>

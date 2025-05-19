@@ -1,0 +1,36 @@
+<div class="pl-4">
+  Name:
+  <input
+    type="text"
+    class="w-64 h-8 m-2 border border-gray-300"
+    [(ngModel)]="searchFilter"
+  />
+  <button nz-button nzType="default" (click)="search()">
+    🔍 Search by Name
+  </button>
+  <button nz-button nzType="default" class="ml-4" (click)="refresh()">
+    🔄 Reload All
+  </button>
+</div>
+<nz-table nzTemplateMode class="pt-4">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Total Leave Days</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (employee of employees$ | async; track employee.id) {
+    <tr>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.totalLeaveDays }}</td>
+      <td>
+        <button nz-button nzType="default" (click)="edit(employee)">
+          ✏️ Edit
+        </button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</nz-table>
