@@ -1,4 +1,4 @@
-# Vypex Coding Challenge
+# .NET Core API and Angular 19 Front End
 
 ## Problem Statement
 
